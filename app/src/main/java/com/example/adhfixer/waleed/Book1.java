@@ -1,19 +1,10 @@
 package com.example.adhfixer.waleed;
 
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import org.apache.commons.io.IOUtils;
 
@@ -23,23 +14,18 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class MainActivity extends AppCompatActivity{
-    private static final String TAG = "firebase";
-    private FirebaseAuth mAuth;
-
+public class Book1 extends AppCompatActivity {
 
     PDFView pdfView;
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        mAuth = FirebaseAuth.getInstance();
+        setContentView(R.layout.activity_book1);
 
         pdfView = (PDFView) findViewById(R.id.pdfView);
-        //   pdfView.fromAsset("mozart.pdf").load();
+     //   pdfView.fromAsset("mozart.pdf").load();
 
-        //  new retrievePDFStream().execute("http://ancestralauthor.com/download/sample.pdf");
+      //  new retrievePDFStream().execute("http://ancestralauthor.com/download/sample.pdf");
 
 
         pdfView.fromAsset("iberia.pdf")
@@ -56,7 +42,7 @@ public class MainActivity extends AppCompatActivity{
                 // spacing between pages in dp. To define spacing color, set view background
                 .spacing(0)
                 .load();
-        //  new retrievePDFBytes().execute("http://ancestralauthor.com/download/sample.pdf");
+      //  new retrievePDFBytes().execute("http://ancestralauthor.com/download/sample.pdf");
     }
 
 
@@ -91,36 +77,4 @@ public class MainActivity extends AppCompatActivity{
 
         }
     }*/
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        //updateUI(currentUser);
-    }
-    public void createUser(String email, String password){
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            //updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
-                        }
-
-                        // ...
-                    }
-                });
-    }
-
 }
